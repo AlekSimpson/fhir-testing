@@ -12,7 +12,7 @@ def find_normalize_structure(record: dict):
     nested_relations = []
 
     for key, _ in record.items():
-        depth = is_nested_relation(record, key)
+        depth = is_nested_relation_(record, key)
         if depth == SURFACE:
             meta.append(key)
         elif depth == SHALLOW:
@@ -57,11 +57,11 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
 
 
 if __name__ == "__main__":
-    # synthdata = read_ndjson("ExplanationOfBenefit.ndjson")
+    synthdata = read_ndjson("ExplanationOfBenefit.ndjson")
     # synthdata = read_ndjson("Patient.ndjson")
     # synthdata = read_ndjson("Claim.ndjson")
     # synthdata = read_ndjson("ClaimResponse.ndjson")
-    synthdata = read_ndjson("Coverage.ndjson")
+    # synthdata = read_ndjson("Coverage.ndjson")
 
     # x = flatten_fhir_data(cov_synthdata, 'id', verbose=True)
     x = flatten_fhir_data(synthdata, 'id', verbose=True)

@@ -157,6 +157,55 @@ testdata = [
     },
 ]
 
+{
+    'beneficiary': {
+        'reference': 'Patient/-10000000000066'
+    },
+    'contract': [
+        {
+            'id': 'ptc-contract1'
+        },
+        {
+            'reference': 'Coverage/part-a-contract1 reference'
+        }
+    ],
+    'extension': [
+        {
+            'url': 'https://bluebutton.cms.gov/resources/variables/ms_cd', 'valueCoding': {'code': '20', 'display': 'Disabled without ESRD', 'system': 'https://bluebutton.cms.gov/resources/variables/ms_cd'}
+        },
+        {
+            'url': 'https://bluebutton.cms.gov/resources/variables/a_trm_cd',
+            'valueCoding': {
+                'code': '0',
+                'display': 'Not Terminated',
+                'system': 'https://bluebutton.cms.gov/resources/variables/a_trm_cd'
+            }
+        },
+        {
+            'url': 'https://bluebutton.cms.gov/resources/variables/rfrnc_yr',
+            'valueDate': '2021'
+        }
+    ],
+    'grouping': {
+        'subGroup': 'Medicare',
+        'subPlan': 'Part A'
+    },
+    'id': 'part-a--10000000000066',
+    'meta': {
+        'lastUpdated': '2021-08-17T13:43:00.037-04:00'
+    },
+    'resourceType': 'Coverage',
+    'status': 'active',
+    'type': {
+        'coding': [
+            {
+                'code': 'Part A',
+                'system': 'Medicare'
+            }
+        ]
+    }
+}
+
 SURFACE = -1
 SHALLOW = 0
 DEEP = 1
@@ -197,19 +246,47 @@ def is_nested_relation(data: dict, attribute: str):
             return DEEP
 
         if contain_dict:
-            if all(all(is_nested_relation(el, key) == SURFACE for key in el.keys()) for el in element):
-                if len(element) == 1:
+            if len(element) == 1:
+                if all(is_nested_relation(element[0], key) == SURFACE for key in element[0]):
                     return SHALLOW
+            # if all(all(is_nested_relation(el, key) == SURFACE for key in el.keys()) for el in element):
+            #     if len(element) == 1:
+            #         return SHALLOW
             return DEEP
 
     if isinstance(element, dict):
-        if len(element.keys()) == 1 and all(is_nested_relation(element, key) == SURFACE for key in element.keys()):
+        if all(is_nested_relation(element, key) == SURFACE for key in element.keys()):
             return SURFACE
 
-        if any(is_nested_relation(element, key) >= SHALLOW for key in element.keys()):
-            return DEEP
-        # return DEEP
+        # if any(is_nested_relation(element, key) >= SHALLOW for key in element.keys()):
+        #     return DEEP
+        return DEEP
 
+    print(f"!!GETTING HERE w {attribute}!!")
+    return SHALLOW
+
+def is_nested_relation_(data: dict, attribute: str):
+    element = data[attribute]
+
+    if not isinstance(element, dict) and not isinstance(element, list):
+        return SURFACE
+
+    if isinstance(element, list):
+        if all(isinstance(el, dict) for el in element):
+            if all(all(is_nested_relation_(obj, key) == SURFACE for key in obj.keys()) for obj in element):
+                return SHALLOW
+
+        return DEEP
+    
+    if isinstance(element, dict):
+        if all(is_nested_relation_(element, key) == SURFACE for key in element.keys()):
+            return SURFACE
+        
+        if all(is_nested_relation_(element, key) == SHALLOW for key in element.keys()):
+            # return SHALLOW # ?
+            return DEEP
+        
+    print(f"!!GETTING HERE w {attribute}!!")
     return SHALLOW
 
 def unfold_shallow_nested_attributes(data: dict, meta: list):
