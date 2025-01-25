@@ -203,12 +203,12 @@ def is_nested_relation(data: dict, attribute: str):
             return DEEP
 
     if isinstance(element, dict):
-        if len(element.keys()) <= 1 and all(is_nested_relation(element, key) == SURFACE for key in element.keys()):
+        if len(element.keys()) == 1 and all(is_nested_relation(element, key) == SURFACE for key in element.keys()):
             return SURFACE
 
-        if len(element.keys()) > 1 or any(is_nested_relation(element, key) >= SHALLOW for key in element.keys()):
+        if any(is_nested_relation(element, key) >= SHALLOW for key in element.keys()):
             return DEEP
-        return DEEP
+        # return DEEP
 
     return SHALLOW
 

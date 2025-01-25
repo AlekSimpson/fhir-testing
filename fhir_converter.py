@@ -30,6 +30,7 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
 
         if len(record_paths) == 0:
             record_paths = [None]
+            data = pd.DataFrame(data).drop(columns=nested_relations).to_dict('records')
 
         if verbose:
             print(f'paths = {record_paths}')
@@ -57,10 +58,10 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
 
 if __name__ == "__main__":
     # synthdata = read_ndjson("ExplanationOfBenefit.ndjson")
-    synthdata = read_ndjson("Patient.ndjson")
+    # synthdata = read_ndjson("Patient.ndjson")
     # synthdata = read_ndjson("Claim.ndjson")
     # synthdata = read_ndjson("ClaimResponse.ndjson")
-    # synthdata = read_ndjson("Coverage.ndjson")
+    synthdata = read_ndjson("Coverage.ndjson")
 
     # x = flatten_fhir_data(cov_synthdata, 'id', verbose=True)
     x = flatten_fhir_data(synthdata, 'id', verbose=True)
