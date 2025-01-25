@@ -1,3 +1,0 @@
-,address.state,birthDate,gender,id,meta.lastUpdated,resourceType,numbers,name.family,name.given,name.use
-0,22,1952-11-17,male,-10000000000066,timestamp,Patient,"[1, 2, 3, 4, 5]",Schneider199,['Werner409'],usual
-1,18,1952-11-17,female,-10000000000034,timestamp,Patient,"[1, 2, 3, 4, 5]",Marks,['Melody'],usual

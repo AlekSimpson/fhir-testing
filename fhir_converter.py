@@ -11,14 +11,19 @@ def find_normalize_structure(record: dict):
     meta = []
     nested_relations = []
 
+    action_map = {
+        SURFACE: meta.append,
+        SHALLOW: record_paths.append,
+        DEEP: nested_relations.append,
+    }
+
     for key, _ in record.items():
-        depth = is_nested_relation_(record, key)
-        if depth == SURFACE:
-            meta.append(key)
-        elif depth == SHALLOW:
-            record_paths.append(key)
-        elif depth == DEEP:
+        if key == 'identifier':
             nested_relations.append(key)
+            continue
+
+        depth = is_nested_relation(record, key)
+        action_map[depth](key)
 
     meta = unfold_shallow_nested_attributes(record, meta)
 
@@ -31,11 +36,6 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
         if len(record_paths) == 0:
             record_paths = [None]
             data = pd.DataFrame(data).drop(columns=nested_relations).to_dict('records')
-
-        if verbose:
-            print(f'paths = {record_paths}')
-            print(f'meta = {meta}')
-            print(f'nested = {nested_relations}')
 
         frames = [pd.json_normalize(data, record_paths[0], meta, record_prefix=f"{record_paths[0]}.")]
         total_frame = frames[0]
@@ -52,30 +52,24 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
 
         return total_frame
     except Exception as e:
+        raise e
+
+def test_flatten(filename):
+    try:
+        synth = read_ndjson(filename + ".ndjson")
+        df = flatten_fhir_data(synth, 'id', verbose=False)
+        save_csv_output(df, filename + ".csv")
+        print(f'--------> {filename} flatten successful.\n')
+    except Exception as e:
         print(traceback.format_exc())
-        print("flattening failed--------------")
+        print(f'--------> {filename} failed.\n')
 
 
 if __name__ == "__main__":
-    synthdata = read_ndjson("ExplanationOfBenefit.ndjson")
-    # synthdata = read_ndjson("Patient.ndjson")
-    # synthdata = read_ndjson("Claim.ndjson")
-    # synthdata = read_ndjson("ClaimResponse.ndjson")
-    # synthdata = read_ndjson("Coverage.ndjson")
+    testfiles = ["Patient", "Claim", "ClaimResponse", "Coverage", "ExplanationOfBenefit"]
 
-    # x = flatten_fhir_data(cov_synthdata, 'id', verbose=True)
-    x = flatten_fhir_data(synthdata, 'id', verbose=True)
-    save_csv_output(x, 'synthdata.csv')
-
-    # save_csv_output(x, 'patient.csv')
+    for file in testfiles:
+        test_flatten(file)
 
 
 
-
-
-
-
-
-# ClaimResponse: id contained somewhere in each record
-# Coverage: id contained somewhere in each record
-# Claim: has id
