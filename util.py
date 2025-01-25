@@ -1,5 +1,4 @@
 import pandas as pd
-from enum import Enum
 
 testdata = [
     {
@@ -177,21 +176,7 @@ def does_list_have_list(array: list):
 def does_list_have_dict(array: list):
     return any(isinstance(x, dict) for x in array)
 
-[
-    {
-        "system":"http://hl7.org/fhir/sid/us-mbi",
-        "type":{
-            "coding":[
-                {
-                    "code":"MC",
-                    "display":"Patient's Medicare Number",
-                    "system":"http://terminology.hl7.org/CodeSystem/v2-0203"
-                }
-            ]
-        },
-        "value":"1S00E00AM35"
-    }
-]
+
 
 def is_nested_relation(data: dict, attribute: str):
     # -1  - the attribute is a single object that can be easily represented
@@ -212,12 +197,9 @@ def is_nested_relation(data: dict, attribute: str):
             return DEEP
 
         if contain_dict:
-            if len(element) > 1:
-                return DEEP
-
-            if all(is_nested_relation(element, key) == SURFACE for key in element.keys()):
-                return SHALLOW
-
+            if all(all(is_nested_relation(el, key) == SURFACE for key in el.keys()) for el in element):
+                if len(element) == 1:
+                    return SHALLOW
             return DEEP
 
     if isinstance(element, dict):
@@ -240,9 +222,6 @@ def unfold_shallow_nested_attributes(data: dict, meta: list):
         for key, value in data[entry].items():
             new_list.append([entry, key])
     return new_list
-
-
-
 
 
 

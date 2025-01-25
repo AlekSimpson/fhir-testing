@@ -29,16 +29,14 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
         record_paths, meta, nested_relations = find_normalize_structure(data[0])
 
         if len(record_paths) == 0:
-            print("No record_paths found")
-            return None
+            record_paths = [None]
 
         if verbose:
             print(f'paths = {record_paths}')
             print(f'meta = {meta}')
             print(f'nested = {nested_relations}')
 
-        first_frame = pd.json_normalize(data, record_paths[0], meta, record_prefix=f"{record_paths[0]}.")
-        frames = [first_frame]
+        frames = [pd.json_normalize(data, record_paths[0], meta, record_prefix=f"{record_paths[0]}.")]
         total_frame = frames[0]
         for index in tqdm(range(1, len(record_paths))):
             path = record_paths[index]
@@ -59,9 +57,9 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
 
 if __name__ == "__main__":
     # synthdata = read_ndjson("ExplanationOfBenefit.ndjson")
-    # synthdata = read_ndjson("Patient.ndjson")
+    synthdata = read_ndjson("Patient.ndjson")
     # synthdata = read_ndjson("Claim.ndjson")
-    synthdata = read_ndjson("ClaimResponse.ndjson")
+    # synthdata = read_ndjson("ClaimResponse.ndjson")
     # synthdata = read_ndjson("Coverage.ndjson")
 
     # x = flatten_fhir_data(cov_synthdata, 'id', verbose=True)
