@@ -1,9 +1,11 @@
 import pandas as pd
 import warnings
-from tqdm import tqdm
 import traceback
 import json
+from tqdm import tqdm
 from util import *
+import sys
+import os
 warnings.filterwarnings('ignore')  # Suppresses all warnings
 
 def find_normalize_structure(record: dict):
@@ -12,13 +14,13 @@ def find_normalize_structure(record: dict):
     nested_relations = []
 
     action_map = {
-        SURFACE: meta.append,
-        SHALLOW: record_paths.append,
-        DEEP: nested_relations.append,
+        META: meta.append,
+        PATH: record_paths.append,
+        NEST: nested_relations.append,
     }
 
     for key, _ in record.items():
-        if key == 'identifier':
+        if key == 'identifier' or key == 'organization' or key == 'insurance' or key == 'insurer':
             nested_relations.append(key)
             continue
 
@@ -29,7 +31,7 @@ def find_normalize_structure(record: dict):
 
     return record_paths, meta, nested_relations
 
-def flatten_fhir_data(data: list, merge_key: str, verbose=False):
+def flatten_fhir_data(data: list, merge_key: str):
     try:
         record_paths, meta, nested_relations = find_normalize_structure(data[0])
 
@@ -47,29 +49,65 @@ def flatten_fhir_data(data: list, merge_key: str, verbose=False):
             cols_to_use = cols_to_use.append(pd.Index([merge_key]))
             total_frame = pd.merge(total_frame, frames[index][cols_to_use], on=merge_key)
 
-        if verbose:
-            print(total_frame)
-
         return total_frame
     except Exception as e:
         raise e
 
-def test_flatten(filename):
-    try:
-        synth = read_ndjson(filename + ".ndjson")
-        df = flatten_fhir_data(synth, 'id', verbose=False)
-        save_csv_output(df, filename + ".csv")
-        print(f'--------> {filename} flatten successful.\n')
-    except Exception as e:
-        print(traceback.format_exc())
-        print(f'--------> {filename} failed.\n')
+def flatten():
+    files = os.listdir('./input/')
+    for file in files:
+        try:
+            filename = file.split('.')[0]
+    
+            data = read_ndjson(file)
+            df = flatten_fhir_data(data, 'id')
+            save_csv_output(df, filename + ".csv")
+            print(f'torch: {filename} flatten successful.\n')
+        except Exception as e:
+            print(traceback.format_exc())
+            print(f'torch: {filename} failed.\n')
+    print('torch: done.')
+    
+def test_flatten():
+    files = os.listdir('./testdata/')
+
+    for file in files:
+        try:
+            filename = file.split('.')[0]
+
+            synth = read_ndjson(file)
+            df = flatten_fhir_data(synth, 'id')
+            save_csv_output(df, filename + ".csv")
+            print(f'torch: {filename} flatten successful.\n')
+        except Exception as e:
+            print(traceback.format_exc())
+            print(f'torch: {filename} failed.\n')
+    print('torch: done.')
+
+def help_user():
+    print("Available commands:")
+    print("\t./torch help: prints help menu")
+    print("\t./torch flatten: reads all .ndjson files in ./input/ and flattens them to .csv")
+    print("\t./torch test: runs the flatten operation on the test data inside ./testdata/")
+
+def parse_program_args():
+    args = sys.argv
+
+    if len(args) <= 1: 
+        print("No program inputs provided. Use `./torch help` for more information.")
+        return
+
+    command_map = {
+        'help': help_user,
+        'flatten': flatten,
+        'test': test_flatten,
+    }
+
+    if args[1] not in command_map:
+        return
+
+    command_map[args[1]]()
 
 
 if __name__ == "__main__":
-    testfiles = ["Patient", "Claim", "ClaimResponse", "Coverage", "ExplanationOfBenefit"]
-
-    for file in testfiles:
-        test_flatten(file)
-
-
-
+    parse_program_args()

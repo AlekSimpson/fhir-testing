@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python fhir_converter.py "$@"
