@@ -31,13 +31,71 @@ def find_normalize_structure(record: dict):
 
     return record_paths, meta, nested_relations
 
+# 'identifier' : [
+#     {
+#         'system': 'https://bluebutton.cms.gov/resources/variables/bene_id',
+#         'value': '-10000000000066'
+#     },
+#     {
+#         'system': 'https://bluebutton.cms.gov/resources/identifier/mbi-hash',
+#         'value': '0e239e4895a76a2aff678507b1626a7cd08d23db07280e7efa228c8b0c156d23'
+#     },
+#     {
+#         'extension': [
+#             {
+#                 'url': 'https://bluebutton.cms.gov/resources/codesystem/identifier-currency',
+#                 'valueCoding': {
+#                     'code': 'current',
+#                     'display': 'Current',
+#                     'system': 'https://bluebutton.cms.gov/resources/codesystem/identifier-currency'
+#                 }
+#             }
+#         ],
+#         'system': 'http://hl7.org/fhir/sid/us-mbi',
+#         'value': '1S00E00AA66'
+#     }
+# ]
+
+def generate_data_relations(data: list, relational_fields: list):
+    field = relational_fields[1]
+
+    # get base frame
+    df = pd.json_normalize(data, record_path=field, meta=['id'])
+
+    # test = df.to_dict('records') <--- use this list to scan for the record_path attributes (basically just want to check if any of them are a list)
+    # print(test[0])
+
+    # get all pathed nested attribute frame data
+    df_dict = pd.DataFrame(df[['extension', 'id']]).to_dict('records')
+
+    # normalize it
+    norm_df = pd.json_normalize(df_dict, 'extension', meta=['id'])
+
+    # merge it with the base frame
+    cols_to_use = df.columns.difference(['extension'])
+    result = pd.merge(df[cols_to_use], norm_df, on='id')
+    result = result.add_prefix('extension.')
+    print(result)
+
+    save_csv_output(result, 'TESTOUTPUT.csv')
+
+    # for field in relational_fields:
+    #     print(f'------- {field} -------')
+    #     df = pd.json_normalize(data, record_path=field, meta=['id'])
+    #     print(df)
+    #     print(df.to_dict('records')[2])
+    #     # record_paths, meta, nested = find_normalize_structure(data[0][field])
+
+    #     # print(f'record_paths = {record_paths}')
+    #     # print(f'meta = {meta}')
+    #     # print(f'nested = {nested}')
+
 def flatten_fhir_data(data: list, merge_key: str):
     try:
         record_paths, meta, nested_relations = find_normalize_structure(data[0])
 
         if len(record_paths) == 0:
             record_paths = [None]
-            data = pd.DataFrame(data).drop(columns=nested_relations).to_dict('records')
 
         frames = [pd.json_normalize(data, record_paths[0], meta, record_prefix=f"{record_paths[0]}.")]
         total_frame = frames[0]
@@ -49,11 +107,13 @@ def flatten_fhir_data(data: list, merge_key: str):
             cols_to_use = cols_to_use.append(pd.Index([merge_key]))
             total_frame = pd.merge(total_frame, frames[index][cols_to_use], on=merge_key)
 
+        generate_data_relations(data, nested_relations)
+
         return total_frame
     except Exception as e:
         raise e
 
-def flatten():
+def flatten_files():
     files = os.listdir('./input/')
     for file in files:
         try:
@@ -99,7 +159,7 @@ def parse_program_args():
 
     command_map = {
         'help': help_user,
-        'flatten': flatten,
+        'flatten': flatten_files,
         'test': test_flatten,
     }
 
@@ -110,4 +170,14 @@ def parse_program_args():
 
 
 if __name__ == "__main__":
-    parse_program_args()
+    # parse_program_args()
+
+    synth = read_ndjson('Patient.ndjson')
+    df = flatten_fhir_data(synth, 'id')
+
+
+
+
+
+
+
