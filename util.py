@@ -1,14 +1,27 @@
 import pandas as pd
+import os
 
 PATH = -1
 META = 0
 NEST = 1
 
-def save_csv_output(df, filename):
-    if df is None:
-        return
+class CSVWriter:
+    def __init__(self):
+        self.current_bundle_directory = None
 
-    df.to_csv(f"output/{filename}")
+    def save_csv_output(self, df, filename):
+        if df is None:
+            return
+    
+        if self.current_bundle_directory == None:
+            df.to_csv(f"output/{filename}")
+        else:
+            try:
+                os.mkdir(f'output/{self.current_bundle_directory}')
+            except:
+                pass
+
+            df.to_csv(f'output/{self.current_bundle_directory}/{filename}')
 
 def read_ndjson(filename):
     return pd.read_json(f"input/{filename}", lines=True).to_dict('records')
@@ -55,8 +68,6 @@ def unfold_shallow_nested_attributes(data: dict, meta: list):
         for key, value in data[entry].items():
             new_list.append([entry, key])
     return new_list
-
-
 
 
 
