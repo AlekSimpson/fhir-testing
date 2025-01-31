@@ -1,33 +1,33 @@
-,diagnosis.id914,diagnosis.sequence,diagnosis.coding
-0,f--00b12c4d23f0bf580682cf,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-1,f--18a6a70b658cca6814ff7a,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-2,f--381cd478a5a53efa23dec7,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-3,f--3ca694bc63ede072a73c16,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-4,f--505ec3927a065ffbc1f81f,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-5,f--5c11cd372220bc00082554,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-6,f--923231ce78bb326e599825,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-7,f--cb102e3f0d61513aaf4c51,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-8,f--d0f12426d6f79cb0d0979f,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-9,f--e60533d82bd67cba8a0049,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-10,f--fb07a5af0bd58e339f4349,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-11,f--daabbe0dfa7d899e9393b4,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-12,f--154a15dc9d3a32c2cea4f9,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-13,f--d24170bd8eed5d4600ed21,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-14,f--d07d8181e140310e4a9baf,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-15,f--1177a7b647226bf2ebf226,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-16,f--d49e429ac77c662c7e4574,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-17,f--a694a23b6ff281f1cfac09,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-18,f--f34c84c5dba8042f0b4abf,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-19,f--8da90bdcf6394b573283df,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-20,f--9ec237c3efe7ece16b1ac4,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-21,f--4a56aa051fbe87f6ff8727,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-22,f--715bbf6cfd417be5ab4154,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-23,f--4649dc26737260fb1c319c,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-24,f--773d7e471093b91d2cf904,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-25,f--4b227219f6d75711b7446e,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-26,f--6f5c35f007d7c1fc52dda8,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-27,f--a787a19c6faf54601c06b7,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-28,f--15d699496df31485b0fd81,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-29,f--2037172b888d9fc8941793,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-30,f--520a72b5bc08227993eb2a,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
-31,f--a4465778595da7cc14a78f,0,"[{'code': 'admitting', 'display': 'Admitting Diagnosis', 'system': 'http://terminology.hl7.org/CodeSystem/ex-diagnosistype'}]"
+,diagnosis.diagnosisCodeableConcept.coding.code,diagnosis.diagnosisCodeableConcept.coding.system,diagnosis.type.coding.code,diagnosis.type.coding.display,diagnosis.type.coding.system,diagnosis.sequence
+0,E669,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+1,E669,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+2,T50904,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+3,S83419,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+4,T50904,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+5,K011,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+6,T50904,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+7,R52,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+8,T50904,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+9,G43719,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+10,T50904,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+11,T148XX,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+12,D649,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+13,O039,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+14,I10,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+15,K37,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+16,K37,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+17,T148XX,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+18,K635,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+19,G43719,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+20,G43719,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+21,C20,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+22,D649,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+23,E669,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+24,G43719,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+25,K37,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+26,K37,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+27,P2981,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+28,R52,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+29,J329,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+30,K635,http://hl7.org/fhir/sid/icd-10-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
+31,S134XX,http://hl7.org/fhir/sid/icd-9-cm,admitting,Admitting Diagnosis,http://terminology.hl7.org/CodeSystem/ex-diagnosistype,0
