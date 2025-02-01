@@ -1,5 +1,7 @@
-import pandas as pd
 import os
+import re
+from pathlib import Path
+import pandas as pd
 
 class CSVWriter:
     def __init__(self):
@@ -9,19 +11,18 @@ class CSVWriter:
         if df is None:
             return
     
-        print(f'writing {filename}; bundle_dir: {self.current_bundle_directory}')
         if self.current_bundle_directory == None:
-            df.to_csv(f"output/{filename}")
+            df.to_csv(Path(f"output/{filename}"))
         else:
             try:
-                os.mkdir(f'output/{self.current_bundle_directory}')
+                os.mkdir(Path(f'output/{self.current_bundle_directory}'))
             except:
                 pass
 
-            df.to_csv(f'output/{self.current_bundle_directory}/{filename}')
+            df.to_csv(Path(f'output/{self.current_bundle_directory}/{filename}'))
 
 def read_ndjson(filename):
-    return pd.read_json(f"input/{filename}", lines=True).to_dict('records')
+    return pd.read_json(Path(f"input/{filename}"), lines=True).to_dict('records')
 
 def get_relations(df):
     """
@@ -128,35 +129,28 @@ def width_probe(obj, current_width = 0):
 
     return max_width
 
-# def width_probe(obj) -> int:
-#     """
-#     Calculate the maximum width (largest list/dict length) in nested structures.
-#     
-#     Args:
-#         obj: The input object (list, dict, or other)
-#         
-#     Returns:
-#         Maximum length of any list/dict found in the structure
-#     """
-#     if not isinstance(obj, (list, dict)):
-#         return 0
-#     
-#     current_max = len(obj)
-#     
-#     if isinstance(obj, list):
-#         for item in obj:
-#             current_max = max(current_max, width_probe(item))
-#     else:  # Handle dictionaries
-#         for value in obj.values():
-#             current_max = max(current_max, width_probe(value))
-#     
-#     return current_max
+def filter_column_substrings(df):
+    """
+    Filters out substrings matching the regex pattern `.N*` from column names,
+    where N is any single-digit character (0-9).
 
-# def width_probe(data: dict, width: int = 0):
-    # pass
+    Parameters:
+        df (pd.DataFrame): The input DataFrame.
 
-
-
+    Returns:
+        pd.DataFrame: A new DataFrame with filtered column names.
+    """
+    # Define the regex pattern to match `.N*` where N is a single digit
+    pattern = re.compile(r'\.\d+')
+    
+    # Apply the regex to each column name and replace matches with an empty string
+    new_columns = [pattern.sub('', col) for col in df.columns]
+    
+    # Create a copy of the DataFrame to avoid modifying the original
+    new_df = df.copy()
+    new_df.columns = new_columns
+    
+    return new_df
 
 
 
