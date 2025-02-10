@@ -105,29 +105,26 @@ def flatten_helper(data: list):
     df = filter_column_substrings(df)
     return flatten_helper(df.to_dict('records'))
 
-def flatten_files(input_dir_path):
+def flatten_files(input_dir_path=Path('input/')):
     # If the directory doesn't exist throw an error.
     if not input_dir_path.exists():
         print("torch does not detect an 'input' directory in the current directory.\ncannot flatten without 'input' directory.")
         return 
 
     # read every file in the directory path
-    for file_path in directory_path.iterdir():
+    for file_path in input_dir_path.iterdir():
         if file_path.is_file():  # Ensure it's a file (not a directory)
-            print(f"Reading file: {file_path}")
-            with file_path.open("r") as f:
-                print(f.read())
-    
+            print(f"Flattening file: {file_path.name}...")
+            filename_target = file_path.name.split('.')[0] # isolate the '.ndjson' file extension from the name
+
+            data = read_ndjson(file_path.name)
+            df = flatten(data, filename_target)
+            csv_writer.save_csv_output(df, f'{filename_target}.csv')
+            print('finished.\n')
+
 
 if __name__ == "__main__":
-    # parse_program_args()
-    target = 'Patient'
-
-    data = read_ndjson(f'{target}.ndjson')
-    df = flatten(data, target)
-    csv_writer.save_csv_output(df, f'{target}.csv')
-
-    print(df)
+    parse_program_args()
 
 
 
